@@ -73,7 +73,7 @@ public abstract class FishyWorldGenBase {
 								}
 								break;
 							case 3:
-								if(allowedBlocks.contains(getBlockId(x + i, getTerrainHeightAt(x + i, z + j), z + j)))
+								if(allowedBlocks.contains(getBlockId(x + i, y, z + j)))
 								{
 									placeBlock(x + i, getTerrainHeightAt(x + i, z + j), z + j, id, meta);
 								}
