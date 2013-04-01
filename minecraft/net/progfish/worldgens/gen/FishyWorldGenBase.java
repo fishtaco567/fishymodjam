@@ -77,10 +77,20 @@ public abstract class FishyWorldGenBase {
 		}
 		return 64;
 	}
+
+	protected void placeBlock(int i, int j, int k, int id)
+	{
+		worldObj.setBlock(i, j, k, id, 0, 3);
+	}
 	
 	protected void placeBlock(int i, int j, int k, int id, int meta)
 	{
 		worldObj.setBlock(i, j, k, id, meta, 3);
+	}
+	
+	protected void placeBlockWithNotify(int i, int j, int k, int id, int meta)
+	{
+		worldObj.setBlock(i, j, k, id, meta, 2);
 	}
 	
 	protected int getBlockId(int i, int j, int k)

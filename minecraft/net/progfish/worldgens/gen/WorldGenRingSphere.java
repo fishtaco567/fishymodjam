@@ -25,6 +25,12 @@ public class WorldGenRingSphere extends FishyWorldGenBase {
 		genCircle(i, j, k, Block.stone.blockID, 0, ringSize, ringSize - 1.5F, 1);
 		genCircle(i, j, k, Block.stone.blockID, 0, ringSize, ringSize - 1.5F, 2);
 		
+		int halfRingSize = ringSize / 2;
+		placeBlockWithNotify(i - halfRingSize, j, k - halfRingSize, Block.waterMoving.blockID, 0);
+		placeBlockWithNotify(i - halfRingSize, j, k + halfRingSize, Block.waterMoving.blockID, 0);
+		placeBlockWithNotify(i + halfRingSize, j, k + halfRingSize, Block.waterMoving.blockID, 0);
+		placeBlockWithNotify(i + halfRingSize, j, k - halfRingSize, Block.waterMoving.blockID, 0);
+		
 		j += ringSize;
 		
 		placeBlock(i, j, k, Block.chest.blockID, 0);
