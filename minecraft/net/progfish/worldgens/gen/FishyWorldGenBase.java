@@ -1,13 +1,18 @@
 package net.progfish.worldgens.gen;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.world.World;
 
-public class FishyWorldGenBase {
+public abstract class FishyWorldGenBase {
 
 	World worldObj;
 	Random rand;
+	
+	List<Integer> naturalBlocks = Arrays.asList(Block.dirt.blockID, Block.grass.blockID, Block.stone.blockID, Block.sand.blockID, Block.blockClay.blockID);
 	
 	public FishyWorldGenBase(World worldObj, Random rand)
 	{
@@ -60,9 +65,28 @@ public class FishyWorldGenBase {
 		}
 	}
 	
+	public int getTerrainHeightAt(int x, int z)
+	{
+		for(int j = 127; j > 0; j--)
+		{
+			if(naturalBlocks.contains(getBlockId(x, j, z)))
+			{
+				return j;
+			}
+		}
+		return 64;
+	}
+	
 	public void placeBlock(int i, int j, int k, int id, int meta)
 	{
 		worldObj.setBlock(i, j, k, id, meta, 3);
 	}
+	
+	public int getBlockId(int i, int j, int k)
+	{
+		return worldObj.getBlockId(i, j, k);
+	}
+	
+	public abstract void generate(int i, int j, int k);
 	
 }
