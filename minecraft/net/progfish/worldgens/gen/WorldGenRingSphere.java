@@ -3,6 +3,7 @@ package net.progfish.worldgens.gen;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.world.World;
 
 public class WorldGenRingSphere extends FishyWorldGenBase {
@@ -13,13 +14,24 @@ public class WorldGenRingSphere extends FishyWorldGenBase {
 
 	@Override
 	public void generate(int i, int j, int k) {
-		j = getTerrainHeightAt(i, k) + rand.nextInt(30) + 10;
+		int height =  + rand.nextInt(30) + 10;
+		j = getTerrainHeightAt(i, k) + height;
 		
-		int ringSize = 6 + rand.nextInt(6);
+		int ringSize = height / 3 + rand.nextInt(6);
 		
 		genCircle(i, j, k, Block.stone.blockID, 0, ringSize, ringSize - 1.5F, 0);
 		genCircle(i, j, k, Block.stone.blockID, 0, ringSize, ringSize - 1.5F, 1);
 		genCircle(i, j, k, Block.stone.blockID, 0, ringSize, ringSize - 1.5F, 2);
+		
+		j += ringSize;
+		
+		placeBlock(i, j, k, Block.chest.blockID, 0);
+		
+		TileEntityChest chest = (TileEntityChest) worldObj.getBlockTileEntity(i, j, k);
+		if(chest != null)
+		{
+			
+		}
 	}
 
 }
