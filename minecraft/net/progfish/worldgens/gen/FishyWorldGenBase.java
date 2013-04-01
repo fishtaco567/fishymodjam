@@ -21,11 +21,12 @@ public abstract class FishyWorldGenBase {
 	}
 	
 	//0 = xz, 1 = yx, 2 = yz
-	public void genCircle(int x, int y, int z, int id, int meta, int outerRadius, int innerRadius, int dir)
+	protected void genCircle(int x, int y, int z, int id, int meta, float outerRadius, float innerRadius, int dir)
 	{
-		for(int i = -outerRadius; i < outerRadius; i++)
+		int outerRadiusCeil = (int) Math.ceil(outerRadius);
+		for(int i = -outerRadiusCeil; i < outerRadiusCeil; i++)
 		{
-			for(int j = -outerRadius; j < outerRadius; j++)
+			for(int j = -outerRadiusCeil; j < outerRadiusCeil; j++)
 			{
 				int dist2 = (i * i) + (j * j);
 				if(outerRadius * outerRadius > dist2 && innerRadius * innerRadius < dist2)
@@ -47,7 +48,7 @@ public abstract class FishyWorldGenBase {
 		}
 	}
 	
-	public void genSphere(int x, int y, int z, int id, int meta, int outerRadius, int innerRadius)
+	protected void genSphere(int x, int y, int z, int id, int meta, int outerRadius, int innerRadius)
 	{
 		for(int i = -outerRadius; i < outerRadius; i++)
 		{
@@ -65,7 +66,7 @@ public abstract class FishyWorldGenBase {
 		}
 	}
 	
-	public int getTerrainHeightAt(int x, int z)
+	protected int getTerrainHeightAt(int x, int z)
 	{
 		for(int j = 127; j > 0; j--)
 		{
@@ -77,12 +78,12 @@ public abstract class FishyWorldGenBase {
 		return 64;
 	}
 	
-	public void placeBlock(int i, int j, int k, int id, int meta)
+	protected void placeBlock(int i, int j, int k, int id, int meta)
 	{
 		worldObj.setBlock(i, j, k, id, meta, 3);
 	}
 	
-	public int getBlockId(int i, int j, int k)
+	protected int getBlockId(int i, int j, int k)
 	{
 		return worldObj.getBlockId(i, j, k);
 	}
