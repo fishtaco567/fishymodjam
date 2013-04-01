@@ -25,11 +25,11 @@ public class GenHandler implements IWorldGenerator {
 	
 	private void generateSurface(World world, Random rand, int i, int k)
 	{
-		if(rand.nextInt(25) == 0)
+		if(rand.nextInt(50) == 0)
 		{
 			new WorldGenRingSphere(world, rand).generate(i + 8, 0, k + 8);
 		}
-		if(rand.nextInt(25) == 0)
+		if(rand.nextInt(50) == 0)
 		{
 			new WorldGenRings(world, rand).generate(i + 8, 0, k + 8);
 		}

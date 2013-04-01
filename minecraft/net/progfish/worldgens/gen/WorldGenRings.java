@@ -15,6 +15,11 @@ public class WorldGenRings extends FishyWorldGenBase {
 	public void generate(int i, int j, int k) {
 		j = getTerrainHeightAt(i, k);
 		
+		if(rand.nextInt(4) == 0)
+		{
+			j += rand.nextInt(20) + 10;
+		}
+		
 		int numberOfRings = rand.nextInt(4) + 4;
 		
 		int ringSize = numberOfRings + 2 + rand.nextInt(4);

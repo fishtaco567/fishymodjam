@@ -20,7 +20,7 @@ public abstract class FishyWorldGenBase {
 		this.rand = rand;
 	}
 	
-	//0 = xz, 1 = yx, 2 = yz
+	//0 = xz, 1 = yx, 2 = yz, 3 = xz follow terrain
 	protected void genCircle(int x, int y, int z, int id, int meta, float outerRadius, float innerRadius, int dir)
 	{
 		int outerRadiusCeil = (int) Math.ceil(outerRadius);
@@ -29,7 +29,7 @@ public abstract class FishyWorldGenBase {
 			for(int j = -outerRadiusCeil; j < outerRadiusCeil; j++)
 			{
 				int dist2 = (i * i) + (j * j);
-				if(outerRadius * outerRadius > dist2 && innerRadius * innerRadius < dist2)
+				if(outerRadius * outerRadius >= dist2 && innerRadius * innerRadius <= dist2)
 				{
 					switch(dir)
 					{
@@ -41,6 +41,9 @@ public abstract class FishyWorldGenBase {
 							break;
 						case 2:
 							placeBlock(x, y + i, z + j, id, meta);
+							break;
+						case 3:
+							placeBlock(x + i, getTerrainHeightAt(x + i, z + j), z + j, id, meta);
 							break;
 					}
 				}
