@@ -42,6 +42,24 @@ public class FishyWorldGenBase {
 		}
 	}
 	
+	public void genSphere(int x, int y, int z, int id, int meta, int outerRadius, int innerRadius)
+	{
+		for(int i = -outerRadius; i < outerRadius; i++)
+		{
+			for(int j = -outerRadius; j < outerRadius; j++)
+			{
+				for(int k = -outerRadius; k < outerRadius; k++)
+				{
+					int dist2 = (i * i) + (j * j) + (k * k);
+					if(outerRadius * outerRadius > dist2 && innerRadius * innerRadius < dist2)
+					{
+						placeBlock(x + i, y + j, z + k, id, meta);
+					}
+				}
+			}
+		}
+	}
+	
 	public void placeBlock(int i, int j, int k, int id, int meta)
 	{
 		worldObj.setBlock(i, j, k, id, meta, 3);
