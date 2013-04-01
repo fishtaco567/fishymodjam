@@ -6,6 +6,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.progfish.worldgens.gen.WorldGenRingSphere;
 import net.progfish.worldgens.gen.WorldGenRings;
+import net.progfish.worldgens.gen.WorldGenRuins;
 import cpw.mods.fml.common.IWorldGenerator;
 
 public class GenHandler implements IWorldGenerator {
@@ -32,6 +33,10 @@ public class GenHandler implements IWorldGenerator {
 		if(rand.nextInt(50) == 0)
 		{
 			new WorldGenRings(world, rand).generate(i + 8, 0, k + 8);
+		}
+		if(rand.nextInt(50) == 0)
+		{
+			new WorldGenRuins(world, rand).generate(i + 8, 0, k + 8);
 		}
 	}
 	

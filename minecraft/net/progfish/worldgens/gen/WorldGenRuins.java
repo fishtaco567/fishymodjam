@@ -20,7 +20,7 @@ public class WorldGenRuins extends FishyWorldGenBase {
 		
 		int radius = rand.nextInt(6) + 6;
 		
-		genCircle(i, j, k, Block.cobblestoneMossy.blockID, 0, radius, 0, 3);
+		genCircle(i, j, k, Block.cobblestoneMossy.blockID, 0, radius, 0, 3, true);
 		
 		float pillarRadius = radius * .8F;
 		float angle = rand.nextFloat() * 6;

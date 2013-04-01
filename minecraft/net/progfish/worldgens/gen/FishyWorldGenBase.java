@@ -13,6 +13,7 @@ public abstract class FishyWorldGenBase {
 	Random rand;
 	
 	List<Integer> naturalBlocks = Arrays.asList(Block.dirt.blockID, Block.grass.blockID, Block.stone.blockID, Block.sand.blockID, Block.blockClay.blockID);
+	List<Integer> allowedBlocks = Arrays.asList(0, Block.tallGrass.blockID, Block.plantRed.blockID, Block.plantYellow.blockID);
 	
 	public FishyWorldGenBase(World worldObj, Random rand)
 	{
@@ -21,7 +22,7 @@ public abstract class FishyWorldGenBase {
 	}
 	
 	//0 = xz, 1 = yx, 2 = yz, 3 = xz follow terrain
-	protected void genCircle(int x, int y, int z, int id, int meta, float outerRadius, float innerRadius, int dir)
+	protected void genCircle(int x, int y, int z, int id, int meta, float outerRadius, float innerRadius, int dir, boolean overgen)
 	{
 		int outerRadiusCeil = (int) Math.ceil(outerRadius);
 		for(int i = -outerRadiusCeil; i < outerRadiusCeil; i++)
@@ -31,20 +32,53 @@ public abstract class FishyWorldGenBase {
 				int dist2 = (i * i) + (j * j);
 				if(outerRadius * outerRadius >= dist2 && innerRadius * innerRadius <= dist2)
 				{
-					switch(dir)
+					if(overgen)
 					{
-						case 0:
-							placeBlock(x + i, y, z + j, id, meta);
-							break;
-						case 1:
-							placeBlock(x + i, y + j, z, id, meta);
-							break;
-						case 2:
-							placeBlock(x, y + i, z + j, id, meta);
-							break;
-						case 3:
-							placeBlock(x + i, getTerrainHeightAt(x + i, z + j), z + j, id, meta);
-							break;
+						switch(dir)
+						{
+							case 0:
+								placeBlock(x + i, y, z + j, id, meta);
+								break;
+							case 1:
+								placeBlock(x + i, y + j, z, id, meta);
+								break;
+							case 2:
+								placeBlock(x, y + i, z + j, id, meta);
+								break;
+							case 3:
+								placeBlock(x + i, getTerrainHeightAt(x + i, z + j), z + j, id, meta);
+								break;
+						}
+					}
+					else
+					{
+						switch(dir)
+						{
+							case 0:
+								if(allowedBlocks.contains(getBlockId(x + i, y, z + j)))
+								{
+									placeBlock(x + i, y, z + j, id, meta);
+								}
+								break;
+							case 1:
+								if(allowedBlocks.contains(getBlockId(x + i, y + j, z)))
+								{
+									placeBlock(x + i, y + j, z, id, meta);
+								}
+								break;
+							case 2:
+								if(allowedBlocks.contains(getBlockId(x, y + i, z + j)))
+								{
+									placeBlock(x, y + i, z + j, id, meta);
+								}
+								break;
+							case 3:
+								if(allowedBlocks.contains(getBlockId(x + i, getTerrainHeightAt(x + i, z + j), z + j)))
+								{
+									placeBlock(x + i, getTerrainHeightAt(x + i, z + j), z + j, id, meta);
+								}
+								break;
+						}
 					}
 				}
 			}

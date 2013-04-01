@@ -35,13 +35,13 @@ public class WorldGenRings extends FishyWorldGenBase {
 			switch(dir)
 			{
 				case 0:
-					genCircle(i + ringPosAmb, j + 1, k, Block.stone.blockID, 0, ringSize, ringSize - 1.5F, 2);
+					genCircle(i + ringPosAmb, j + 1, k, Block.stone.blockID, 0, ringSize, ringSize - 1.5F, 2, true);
 					break;
 				case 1:
-					genCircle(i, j + 1, k + ringPosAmb, Block.stone.blockID, 0, ringSize, ringSize - 1.5F, 1);
+					genCircle(i, j + 1, k + ringPosAmb, Block.stone.blockID, 0, ringSize, ringSize - 1.5F, 1, true);
 					break;
 				case 2:
-					genCircle(i, j + ringPosAmb, k, Block.stone.blockID, 0, ringSize, ringSize - 1.5F, 0);
+					genCircle(i, j + ringPosAmb, k, Block.stone.blockID, 0, ringSize, ringSize - 1.5F, 0, true);
 					break;
 					
 			}
