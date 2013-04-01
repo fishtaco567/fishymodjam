@@ -66,6 +66,18 @@ public abstract class FishyWorldGenBase {
 		}
 	}
 	
+	protected void fillDown(int x, int y, int z, int id, int meta)
+	{
+		int terrainLevel = getTerrainHeightAt(x, z);
+		if(y > terrainLevel)
+		{
+			for(int j = y; j > terrainLevel; j--)
+			{
+				placeBlock(x, j, z, id, meta);
+			}
+		}
+	}
+	
 	protected int getTerrainHeightAt(int x, int z)
 	{
 		for(int j = 127; j > 0; j--)
