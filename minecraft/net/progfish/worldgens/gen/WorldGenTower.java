@@ -19,10 +19,10 @@ public class WorldGenTower extends FishyWorldGenBase {
 	public void generate(int i, int j, int k) {
 		j = getTerrainHeightAt(i, k);
 
-		int towerHeight = rand.nextInt(15) + 20;
-		int topHeight = rand.nextInt(3) + 5;
 		int towerRadius = rand.nextInt(3) + 3;
-		int floorHeight = rand.nextInt(3) + 4;
+		int floorHeight = 4;
+		int towerHeight = (rand.nextInt(6) + 8 * (floorHeight));
+		int topHeight = (rand.nextInt(2) + 2) * (floorHeight);
 		
 		for(int y = j; y < towerHeight + j; y++)
 		{
@@ -48,13 +48,17 @@ public class WorldGenTower extends FishyWorldGenBase {
 			{
 				genCircle(i, y, k, Block.stone.blockID, 0, towerRadius, inner - 1, 0, true);
 			}
-			placeBlock(i, y, k + 1, Block.stone.blockID, 0);
-			placeBlock(i, y, k, Block.ladder.blockID, 2);
+			System.out.println((y - j) + ", " + (towerHeight - floorHeight));
+			if(y - j <= towerHeight - floorHeight)
+			{
+				placeBlock(i, y, k + 1, Block.stone.blockID, 0);
+				placeBlock(i, y, k, Block.ladder.blockID, 2);
+			}
 		}
 		
-		placeBlock(i, j + towerHeight - 1, k - 2, Block.chest.blockID, 0);
+		placeBlock(i, j + towerHeight - floorHeight + 1, k - 2, Block.chest.blockID, 0);
 		
-		TileEntityChest chest = (TileEntityChest) worldObj.getBlockTileEntity(i, j + towerHeight - 1, k - 2);
+		TileEntityChest chest = (TileEntityChest) worldObj.getBlockTileEntity(i, j + towerHeight - floorHeight + 1, k - 2);
 		if(chest != null)
 		{
 			int amountOfItem = 3 + rand.nextInt(4);

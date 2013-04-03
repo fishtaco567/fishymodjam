@@ -25,9 +25,9 @@ public abstract class FishyWorldGenBase {
 	protected void genCircle(int x, int y, int z, int id, int meta, float outerRadius, float innerRadius, int dir, boolean overgen)
 	{
 		int outerRadiusCeil = (int) Math.ceil(outerRadius);
-		for(int i = -outerRadiusCeil; i < outerRadiusCeil; i++)
+		for(int i = -outerRadiusCeil; i <= outerRadiusCeil; i++)
 		{
-			for(int j = -outerRadiusCeil; j < outerRadiusCeil; j++)
+			for(int j = -outerRadiusCeil; j <= outerRadiusCeil; j++)
 			{
 				int dist2 = (i * i) + (j * j);
 				if(outerRadius * outerRadius >= dist2 && innerRadius * innerRadius <= dist2)
